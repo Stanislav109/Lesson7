@@ -25,17 +25,8 @@ class Station
     false
   end
 
-  def list_of_trains(block)
-    trains.each do |train|
-      block.call(train)
-    end
-  end
-  
-  protected
-
-  def validate!
-    raise "Name can't be nill" if name == "" || name.nil?
-         
+  def list_of_trains
+    trains.each {|train| yield train} if block_given?
   end
 
   def get_train(train)
@@ -46,6 +37,13 @@ class Station
   def send_train(train)
     #пользователь не может послать станией поезд
     self.trains.delete(train)
+  end
+  
+  protected
+
+  def validate!
+    raise "Name can't be nill" if name == "" || name.nil?
+         
   end
 
 end

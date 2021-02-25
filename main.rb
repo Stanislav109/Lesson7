@@ -46,11 +46,11 @@ class RailRoad
       when 4
         add_route_to_train
       when 5
-        p trains_of_station  
+        trains_of_station  
       when 6
         add_wagon_to_train
       when 7
-        p wagons_of_train  
+        wagons_of_train  
       when 8
         move_train_to_next_station
       when 9
@@ -184,16 +184,15 @@ class RailRoad
     show_trains
     puts "Выберите индекс поезда"
     train_choice = gets.chomp!.to_i 
-    block = lambda  {|wagon| wagon }
-    trains[train_choice-1].list_of_wagons(block)
+    trains[train_choice-1].list_of_wagons { |wagon| puts "Вагон № #{wagon.wagon_number}" }
   end
 
   def trains_of_station
     show_stations
     puts "Выберите индекс станции"
     station_choice = gets.chomp!.to_i
-    block = lambda {|station| station }
-    stations[station_choice-1].list_of_trains(block)
+    stations[station_choice-1].list_of_trains { |train| puts "Поезд № #{train.number}" }
+
   end
 
   def move_train_to_next_station
